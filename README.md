@@ -30,12 +30,14 @@ Our work continued on the results of Mormann et al. in “Representation of abst
 Stimuli were grouped into 10 semantic categories of 10 examples each.  For clarity there were 10 unique birds, 10 unique items of clothing, 10 unique computers, etc.  This dataset allows for classification on three different levels of granularity natural vs. man-made (ie, 5 semantic categories each - flower/bird vs. computer/clothing), the semantic class level (ie, flower vs. bird vs. computer vs. clothing), and unique image (ie, a shoe and a skirt both in the semantic class clothing).
 
 ![image](https://user-images.githubusercontent.com/58300517/84177020-80df4980-aa3f-11ea-85c2-75abd218f555.png)
+
 Figure 1: Hierarchy of Single Neuron Data Set
 100 Images, 2 Parent Categories, 10 Semantic Categories, 10 Examples Each
 
 Single unit neuron readings were likewise grouped into the parent categories of amygdala, hippocampus, entorhinal cortex, and parahippocampal cortex.  Unfortunately raw sensor data was not available, so instead prediction on Z-scores comparing firing rates to a baseline, which the study obtained using Wave_Clus and Combinato, two common spike-detection algorithms that make use of convolutional masks to detect spikes in output readings.
 
 ![image](https://user-images.githubusercontent.com/58300517/84177067-93598300-aa3f-11ea-9c8d-f796368acb7e.png)
+
 Figure 2: Descriptive Statistics of Single Neuron Dataset
 
 **Methods**
@@ -47,12 +49,14 @@ Given the high dimensionality of this task relative to the number of training ex
 Once positive results were obtained and optimized through a thorough search of the hyperparameter space, the same model architecture was broken into 10 individual binary classifiers with the only variation in the architecture being a change to the output unit.  This ensemble of sigmoid classifiers had better compatibility with Shapley Values and also exhibited higher predictive accuracy in most semantic classes.  
 
 ![image](https://user-images.githubusercontent.com/58300517/84177099-a4a28f80-aa3f-11ea-9381-57070adc4dda.png)
+
 Figure 3: Final Five Layer Neural Network Architecture for Binary Classifier
 Binary semantic classifiers were trained on all 5033 features for each of 10 classes
 
 Lastly, we used the SHAP package Deep Explainer algorithm to evaluate these models.  DeepSHAP uses regression to approximate Shapley Values for Deep Learning models.  The approximation uses a distribution of background samples to estimate the relative contribution of each feature to the output of a model.  By plotting Shapley Values for each feature in each observation against those of the dataset as a whole, we are able to determine the relative contribution of that feature to a given prediction.  By summing these contributions across brain regions, then, we can determine the relative role our Neural Network suggests each region might contribute as follows.
 
 ![image](https://user-images.githubusercontent.com/58300517/84177149-b421d880-aa3f-11ea-83b5-50102bbaf269.png)
+
 Figure 4: Example Shapley Values for 5033 Features and Corresponding Regional Distribution
 High contribution of Amygdala (AM) and Hippocampus (HC) vs. mild contribution of Entorhinal Cortex (EC) and negative contribution of Parahippocampus (PHC) for predictions in class “Insects”
 
@@ -64,11 +68,13 @@ These were astounding results as they indicated the validity of a neural network
 The combination of our and prior results seem to indicate non-linear relationships between different segments of the brain.  As a result, we used Shapley Values for interpretability on 10 distinct binary classifiers and saw high accuracy with all classes above 91% accuracy and an average of 97% accuracy across the dataset. 
 
 ![image](https://user-images.githubusercontent.com/58300517/84177197-c3a12180-aa3f-11ea-9cdc-4d8da85b7eea.png)
+
 Figure 5: Comparison of SVM (Mormann et al.) vs. Multi-Class NN Predictive Accuracy
 Box plots show accuracy across 100 cross-validation samples for the SVM approach
 AM = amygdala, HC = hippocampus, EC = entorhinal cortex, & PHC = parahippocampal cortex
 
 ![image](https://user-images.githubusercontent.com/58300517/84177242-d582c480-aa3f-11ea-9090-c02c211aa3a5.png)
+
 Figure 6: Accuracy of Binary Classifiers for Each of Ten Semantic Classes After 100 Epochs
 
 Beyond this high level of accuracy, we were particularly pleased to see that Shapley Values did show distinction between the relative contributions of electrodes in each brain region to out-of-sample predictive accuracy.  For example, while the Amygdala was the leading contributor in most classes, the Wild Animals, Insects, and Instrument classes all saw high contributions from the Hippocampus.  Particularly compelling was the indication that the presence of stimuli in the Parahippocampus actually had a negative impact for classification of Insects. 
