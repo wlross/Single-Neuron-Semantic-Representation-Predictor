@@ -117,10 +117,10 @@ We’d also like to thank Dr. Ueli Rutishauser of California Institute of Techno
 <6>Rudin, C. Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead. Nat Mach Intell 1, 206–215 (2019). https://doi.org/10.1038/s42256-019-0048-x
 
 
-Appendix A - Summary of All Results
+**Appendix A - Summary of All Results**
 ![image](https://user-images.githubusercontent.com/58300517/84177320-f0edcf80-aa3f-11ea-9275-a854d1014961.png)
 
-Appendix B - EEG Research - Alternative Dataset
+**Appendix B - EEG Research - Alternative Dataset**
 Due to the interdisciplinary nature of our research, we evaluated two different datasets in attempting to determine the applicability of Deep Learning and Shapley Values to neuroscience research.  We ultimately found Single Neuron Readings to outperform the EEG data.1  
 
 EEG readings of brain waves from the MindBigData Dataset
